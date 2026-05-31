@@ -1,0 +1,57 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# функция-обработчик кнопки
+def calculate():
+    value = entry.get()
+
+    # проверка: пустое поле
+    if value == "":
+        messagebox.showerror("Error", "Field is empty!")
+        return
+
+    # проверка: число ли это
+    try:
+        number = float(value)
+    except:
+        messagebox.showerror("Error", "Enter a valid number!")
+        return
+
+    # вычисление (квадрат)
+    result = number ** 2
+
+    # вывод результата
+    result_label.config(text=f"Result: {result}")
+
+# дополнительная кнопка очистки (бонус)
+def clear():
+    entry.delete(0, tk.END)
+    result_label.config(text="Result:")
+
+# создание окна
+window = tk.Tk()
+window.title("Calculator")
+window.geometry("300x200")
+
+# Label
+label = tk.Label(window, text="Enter number:")
+label.pack()
+
+# Entry
+entry = tk.Entry(window)
+entry.pack()
+
+# Button calculate
+button = tk.Button(window, text="Calculate", command=calculate)
+button.pack()
+
+# Button clear
+clear_button = tk.Button(window, text="Clear", command=clear)
+clear_button.pack()
+
+# Label результата
+result_label = tk.Label(window, text="Result:")
+result_label.pack()
+
+# запуск программы
+window.mainloop()
